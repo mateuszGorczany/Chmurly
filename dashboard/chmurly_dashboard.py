@@ -111,7 +111,7 @@ visits = places(date, by_sick=by_sick)
 "### Osoby, które mogły zostać zakażone w tym dniu"
 
 def sick_selector(visits_on_day):
-    sick_people = [visit.get("person", {}) for visit in visits_on_day]
+    sick_people = [visit.get("person", {}) for visit in visits_on_day if visit["person"]["healthstatus"] == "Sick"]
     names = [person.get("name") for person in sick_people]
     selected_person_name = st.selectbox("Wybierz osobę", names)
 
