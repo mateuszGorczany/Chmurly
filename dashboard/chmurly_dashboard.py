@@ -13,7 +13,11 @@ from dateutil.parser import parse as parse_stringtime
 Analiza danych covidowych w oparciu o sztucznie wygenerowany dataset z możliwością dodawania swoich rekordów.
 """
 
-DB = Database(DB_URI, DB_USER, DB_PASSWORD)
+DB = Database(
+    st.secrets["DB_URI"],
+    st.secrets["DB_USER"],
+    st.secrets["DB_PASSWORD"]
+)
 
 def date_of_all_visits():
     visits = DB.read(lambda tx: tx.run(VISITS_DATES).data()[0]["visits"])
