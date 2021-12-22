@@ -194,10 +194,9 @@ def add_new_place(place_name, location, place_type):
 
 with st.form("new_place"):
     place_name = st.text_input("Nazwa")
-    columns = st.beta_columns(3)
-    place_type = columns[0].text_input("Typ")
-    latitude = columns[1].number_input("Szerokość geograficzna")
-    longitude = columns[2].number_input("Długość geograficzna")
+    place_type = st.text_input("Typ")
+    latitude = st.number_input("Szerokość geograficzna")
+    longitude = st.number_input("Długość geograficzna")
     new_location = [latitude, longitude]
 
     submitted = st.form_submit_button("Dodaj miejsce")
@@ -210,10 +209,9 @@ with st.form("new_place"):
 def add_new_person():
     with st.form("new_person"):
         name = st.text_input("Imię i nazwisko")
-        columns = st.beta_columns(3)
-        new_person_health_status = columns[0].selectbox("Stan zdrowia", ["Healthy", "Sick"])
-        confirm_date = columns[1].date_input("Data potwierdzenia statusu zdrowia")
-        confirm_time = columns[2].text_input("Czas potwierdzenia statusu zdrowia", placeholder="np. 19:45")
+        new_person_health_status = st.selectbox("Stan zdrowia", ["Healthy", "Sick"])
+        confirm_date = st.date_input("Data potwierdzenia statusu zdrowia")
+        confirm_time = st.text_input("Czas potwierdzenia statusu zdrowia", placeholder="np. 19:45")
 
         submitted = st.form_submit_button("Dodaj osobę")
         if submitted:
@@ -233,14 +231,12 @@ add_new_person()
 """
 def add_new_visit():
     with st.form("new_visit"):
-        columns1 = st.beta_columns(2)
-        person_id = int(columns1[0].number_input("ID osoby", step=1, format="%d"))
-        place_id = int(columns1[1].number_input("ID miejsca", step=1, format="%d"))
-        columns = st.beta_columns(2)
-        start_date = columns[0].date_input("Data odwiedzin")
-        start_time = columns[0].text_input("Czas odwiedzin", placeholder="np. 19:45")
-        end_date = columns[1].date_input("Data końca odwiedzin")
-        end_time =columns[1].text_input("Czas końca odwiedzin", placeholder="np. 19:45")
+        person_id = int(st.number_input("ID osoby", step=1, format="%d"))
+        place_id = int(st.number_input("ID miejsca", step=1, format="%d"))
+        start_date = st.date_input("Data odwiedzin")
+        start_time = st.text_input("Czas odwiedzin", placeholder="np. 19:45")
+        end_date = st.date_input("Data końca odwiedzin")
+        end_time =st.text_input("Czas końca odwiedzin", placeholder="np. 19:45")
 
         submitted = st.form_submit_button("Dodaj wizytę")
         if submitted:
