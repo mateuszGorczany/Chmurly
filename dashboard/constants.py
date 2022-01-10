@@ -26,10 +26,28 @@ place,
 } as time;
 """
 
+PLACES_VISITED_BY_SICK_PEOPLE_IN_PARTICULAR_DAY_OLD = """
+match (person:Person {healthstatus: "Sick"})--(visit:Visit)--(place:Place)
+where (date(visit.starttime) <= date( $date ) <= date(visit.endtime)) and
+visit.starttime.epochMillis <= person.confirmedtime.epochMillis <= visit.endtime.epochMillis
+return
+{
+    confirmedtime: toString(person.confirmedtime),
+    name: person.name,
+    healthstatus: person.healthstatus,
+    id: id(person)
+} as person,
+place,
+{
+    start: toString(visit.starttime),
+    end: toString(visit.endtime)
+} as time;
+"""
+
 PLACES_VISITED_BY_SICK_PEOPLE_IN_PARTICULAR_DAY = """
 match (person:Person {healthstatus: "Sick"})--(visit:Visit)--(place:Place)
 where (date(visit.starttime) <= date( $date ) <= date(visit.endtime)) and
-visit.starttime.epochMillis < person.confirmedtime.epochMillis < visit.endtime.epochMillis
+person.confirmedtime.epochMillis <= visit.endtime.epochMillis
 return
 {
     confirmedtime: toString(person.confirmedtime),

@@ -64,8 +64,9 @@ def places(date, by_sick=True):
         locations.append(visit.get("place", {}).get("location"))
         create_map_marker(visit).add_to(interactive_map)
 
-    interactive_map.fit_bounds(min_max_coordinates(locations))
-    add_mouse_position_to_map(interactive_map)
+    if len(locations) > 0:
+        interactive_map.fit_bounds(min_max_coordinates(locations))
+        add_mouse_position_to_map(interactive_map)
 
     folium_static(interactive_map)
     return visits
@@ -95,8 +96,9 @@ def most_dangerous_places():
             )
         ).add_to(interactive_map)
 
-    interactive_map.fit_bounds(min_max_coordinates(locations))
-    add_mouse_position_to_map(interactive_map)
+    if len(locations) > 0:
+        interactive_map.fit_bounds(min_max_coordinates(locations))
+        add_mouse_position_to_map(interactive_map)
 
     folium_static(interactive_map)
 
@@ -178,8 +180,9 @@ def all_places():
             )
         ).add_to(interactive_map)
 
-    interactive_map.fit_bounds(min_max_coordinates(locations))
-    add_mouse_position_to_map(interactive_map)
+    if len(locations) > 0:
+        interactive_map.fit_bounds(min_max_coordinates(locations))
+        add_mouse_position_to_map(interactive_map)
 
     folium_static(interactive_map)
 
